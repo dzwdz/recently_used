@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.client.player.ClientPickBlockApplyCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -40,7 +41,10 @@ public class EntryPoint implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
+        ClientPickBlockApplyCallback.EVENT.register((player, result, stack) -> {
+            addToRecent(stack);
+            return stack;
+        });
     }
 
     public static void addToRecent(ItemStack stack) {
