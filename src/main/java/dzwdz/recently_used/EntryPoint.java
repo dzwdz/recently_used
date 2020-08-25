@@ -23,7 +23,7 @@ public class EntryPoint implements ClientModInitializer {
 
     public static final ItemGroup RECENT_GROUP = FabricItemGroupBuilder.create(
             new Identifier("recently_used", "recently_used"))
-            .icon(() -> new ItemStack(Items.COBWEB))
+            .icon(() -> new ItemStack(Items.CLOCK))
             .appendItems(stacks -> {
                 Stream<ItemStack> stream = recent.stream();
                 PlayerEntity player = MinecraftClient.getInstance().player;
