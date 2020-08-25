@@ -3,7 +3,7 @@
   "id": "recently_used",
   "version": "${version}",
   "name": "Recently Used",
-  "description": "",
+  "description": "Adds a creative tab with recently used blocks/items.",
   "authors": [
     "dzwdz"
   ],
