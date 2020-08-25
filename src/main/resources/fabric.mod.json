@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "recently_used",
+  "version": "${version}",
+  "name": "Recently Used",
+  "description": "",
+  "authors": [
+    "dzwdz"
+  ],
+  "contact": {},
+  "license": "MPL-2.0",
+  "icon": "assets/recently_used/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dzwdz.recently_used.EntryPoint"
+    ]
+  },
+  "mixins": [
+    "recently_used.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.9.2+build.206",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  }
+}
