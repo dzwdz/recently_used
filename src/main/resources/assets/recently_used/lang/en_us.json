@@ -1,3 +1,4 @@
 {
-  "itemGroup.recently_used.recently_used": "History"
+  "itemGroup.recently_used.recently_used": "History",
+  "recently_used.trashButton": "Clear history"
 }
