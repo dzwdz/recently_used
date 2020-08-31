@@ -27,6 +27,8 @@ public class EntryPoint implements ClientModInitializer {
     public static final int HISTORY_LENGTH = 54;
     public static LinkedList<ItemStack> recent = new LinkedList<ItemStack>();
 
+    public static final Identifier TRASH_ICON = new Identifier("recently_used", "textures/gui/trash.png");
+
     private static File storageFile;
 
     public static final ItemGroup RECENT_GROUP = FabricItemGroupBuilder.create(
