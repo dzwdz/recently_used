@@ -25,8 +25,10 @@ public class TrashButton extends TexturedButtonWidget {
 
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         super.renderButton(matrices, mouseX, mouseY, delta);
-        if (this.isHovered())
-            screen.renderTooltip(matrices, getMessage(), mouseX, mouseY);
+        try {
+            if (this.isHovered())
+                screen.renderTooltip(matrices, getMessage(), mouseX, mouseY);
+        } catch (NoSuchMethodError e) {} // 1.16.2 crash workaround
     }
 
     public void onPress() {
