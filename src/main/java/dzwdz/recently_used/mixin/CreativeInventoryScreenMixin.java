@@ -33,6 +33,6 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
     @Inject(at = @At("TAIL"),
             method = "init")
     private void createButton(CallbackInfo callbackInfo) {
-        addButton(new TrashButton(x + 177, y + 6, this, new TranslatableText("recently_used.trashButton")));
+        addDrawableChild(new TrashButton(x + 177, y + 6, this, new TranslatableText("recently_used.trashButton")));
     }
 }
