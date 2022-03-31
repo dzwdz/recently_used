@@ -11,9 +11,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 
@@ -38,7 +38,7 @@ public class EntryPoint implements ClientModInitializer {
                 Stream<ItemStack> stream = recent.stream();
                 PlayerEntity player = MinecraftClient.getInstance().player;
                 if (player != null) {
-                    for (ItemStack hotbarStack : player.inventory.main.subList(0, 9)) {
+                    for (ItemStack hotbarStack : player.getInventory().main.subList(0, 9)) {
                         if (hotbarStack.isEmpty()) continue;
                         ItemStack copy = hotbarStack.copy();
                         copy.setCount(1);
@@ -52,13 +52,13 @@ public class EntryPoint implements ClientModInitializer {
 
     public static void load() {
         try {
-            CompoundTag compoundTag = NbtIo.read(storageFile);
+            NbtCompound compoundTag = NbtIo.read(storageFile);
             if (compoundTag == null) return;
-            ListTag listTag = compoundTag.getList("history", 10);
+            NbtList listTag = compoundTag.getList("history", 10);
 
             recent.clear();
             for (int i = 0; i < listTag.size(); i++)
-                recent.add(ItemStack.fromTag(listTag.getCompound(i)));
+                recent.add(ItemStack.fromNbt(listTag.getCompound(i)));
 
         } catch (Exception e) {
             LogManager.getLogger().error("Failed to load block history", e);
@@ -67,10 +67,10 @@ public class EntryPoint implements ClientModInitializer {
 
     public static void save() {
         try {
-            CompoundTag compoundTag = new CompoundTag();
-            ListTag listTag = new ListTag();
+            NbtCompound compoundTag = new NbtCompound();
+            NbtList listTag = new NbtList();
             for (ItemStack item : recent) {
-                listTag.add(item.toTag(new CompoundTag()));
+                listTag.add(item.writeNbt(new NbtCompound()));
             }
             compoundTag.put("history", listTag);
             NbtIo.write(compoundTag, storageFile);
